@@ -1,4 +1,17 @@
-- name: Rust Action
-  # You may pin to the exact commit or the version.
-  # uses: icepuma/rust-action@9e8cfbb3fd54fc813acfc64d055cced3573a09e4
-  uses: icepuma/rust-action@1.68.0
+name: Pub Publish plugin
+
+on: workflow_dispatch
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Publish
+        uses: sakebook/actions-flutter-pub-publisher@v1.3.0
+        with:
+          credential: ${{ secrets.CREDENTIAL_JSON }}
+          flutter_package: true
+          skip_test: true
+          dry_run: false
